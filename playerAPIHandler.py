@@ -31,7 +31,7 @@ class PlayerAPIHandler
         self.agent["place_id"] = place_id
         self.agent.submit()
 
-    def get_hand(hand_format="json"):
+    def get_hand(self, hand_format="json"):
         """
         Get hand information via Player API.
         Parsing hand (json or xml) is calling module's duty.
@@ -46,7 +46,7 @@ class PlayerAPIHandler
             raise ValueError("Hand format is invalid: %s" % hand_format)
         return hand
 
-    def post_hand(cards):
+    def post_hand(self, cards):
         """
         Post hand information via Player API.
         """
@@ -56,9 +56,9 @@ class PlayerAPIHandler
         # convert card information format
         self.agent.submit()
 
-    def _parse_url(url):
+    def _parse_url(self, url):
         """
-        Parse url and retuen tuple of ("protocol", "hostname:port")
+        Parse url and return tuple of ("protocol", "hostname:port")
         """
         parsed = urlparse(url)
         if parsed.scheme:
@@ -74,8 +74,4 @@ class PlayerAPIHandler
         else:
             raise ValueError("Port number is invalid: %s" % url)
         return (protocol, hostname + ":" + port)
-
-if __name__ == "__main__":
-    p = PlayerAPIHandler("http://urari.dip.jp", "kannos", "1234", "1")
-    print p.get_hand()
 
